@@ -1,0 +1,57 @@
+﻿@model ML.RecetaMedica
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="text-center container">
+<h2>Receta Medica</h2>
+<a href="@Url.Action("Form","RecetaMedica")" class="btn btn-success">Agregar</a>
+
+</div>
+<hr />
+@if (Model.RecetasMedicas!=null)
+{
+<div class="container">
+    <div class="row">
+        <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                    <td>Id Receta</td>
+                    <td>Id Paciente</td>
+                    <td>Nombre Paciente</td>
+                    <td>Fecha Consulta</td>
+                    <td>Diagnostico</td>
+                    <td>Nombre Medico</td>
+                    <td>Notas Adicionales</td>
+                    <td>Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                 @foreach (ML.RecetaMedica recetaMedica in Model.RecetasMedicas)
+                        {
+                <tr>
+                         <td>@recetaMedica.IdReceta</td> 
+                         <td>@recetaMedica.Paciente.IdPaciente</td> 
+                         <td>@recetaMedica.Paciente.Nombre</td> 
+                         <td>@recetaMedica.FechaConsulta</td> 
+                         <td>@recetaMedica.Diagnostico</td> 
+                         <td>@recetaMedica.NombreMedico</td> 
+                         <td>@recetaMedica.NotasAdicionales</td>      
+                         <td>
+                                 <a href="@Url.Action("Form","RecetaMedica",new {IdReceta=recetaMedica.IdReceta})" class="btn btn-warning">Actualizar</a>
+                                 <a href="@Url.Action("Delete","RecetaMedica",new {IdReceta=recetaMedica.IdReceta})" class="btn btn-danger">Eliminar</a>
+                         </td>
+                       
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+}
+else
+{
+    <h1>No hay registros</h1>
+}

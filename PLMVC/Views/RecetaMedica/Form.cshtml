@@ -1,0 +1,42 @@
+﻿@model ML.RecetaMedica
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container">
+    @using (Html.BeginForm("Form", "RecetaMedica", FormMethod.Post, new { enctype = "multipart/form-data" })) { 
+    <div class="row">
+        
+        @Html.HiddenFor(Model=>Model.IdReceta)
+        <div class="col-md-2">
+            @Html.LabelFor(model=> Model.Paciente.IdPaciente)
+            @Html.DropDownListFor(model=>Model.Paciente.IdPaciente, new SelectList(Model.RecetasMedicas, "IdPaciente","Nombre"), "Selecciona un paciente",new {@class="form-control"})
+           @* @Html.TextBoxFor(model=>Model.Paciente.IdPaciente, new {@class="form-control"})*@
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model=>Model.FechaConsulta)
+            @Html.TextBoxFor(model=>Model.FechaConsulta, new {@class="form-control", @placeholder="YYYY-MM-DD"})
+          @*  @Html.TextBoxFor(model=>Model.FechaConsulta,new {@class="form-control", @type = "date", @Value = Model.FechaConsulta, @min = "1900-01-01", @max = "9999-12-31"})*@
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model=>Model.Diagnostico)
+            @Html.TextAreaFor(model=>Model.Diagnostico, new {@class="form-control"})
+        </div>  
+        <div class="col-md-2">
+            @Html.LabelFor(model=>Model.NombreMedico)
+            @Html.TextBoxFor(model=>Model.NombreMedico, new {@class="form-control"})
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model=>Model.NotasAdicionales)
+            @Html.TextAreaFor(model=>Model.NotasAdicionales, new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-success" value="Guardar">
+            <a href="@Url.Action("GetAll","RecetaMedica")" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+    }
+</div>
